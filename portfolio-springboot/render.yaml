@@ -1,0 +1,22 @@
+# Optional Render Blueprint; free services sleep when idle and have usage limits.
+services:
+  - type: web
+    name: thfaysal-portfolio
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+      - key: MONGODB_URI
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_TO
+        value: thfaysal711@gmail.com
+      - key: EMAIL_FROM
+        value: onboarding@resend.dev

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#F6FAFF">
+  <title>Private Message | TH Faysal</title>
+  <link rel="icon" th:href="@{/assets/images/favicon.svg}" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/assets/css/admin.css}" href="/assets/css/admin.css">
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <div class="shell navrow">
+      <a class="brand" th:href="@{/admin/inbox}">TH<span>.</span> <small>ADMIN / INBOX</small></a>
+      <div class="nav-actions"><a th:href="@{/admin/inbox}">← Inbox</a><form th:action="@{/admin/logout}" method="post"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><button type="submit" class="button-link">Sign out</button></form></div>
+    </div>
+  </header>
+  <main class="shell dashboard detail-view">
+    <a class="back" th:href="@{/admin/inbox}">← All messages</a>
+    <p class="eyebrow">PRIVATE CONVERSATION</p>
+    <h1 th:text="${message.subject}">Portfolio inquiry</h1>
+    <div class="notice success" th:if="${notice}" th:text="${notice}" role="status"></div>
+    <div class="notice error" th:if="${error}" th:text="${error}" role="alert"></div>
+    <div class="conversation-layout">
+      <section class="surface thread" aria-label="Conversation">
+        <div class="thread-header"><div><p class="eyebrow">FROM VISITOR</p><h2 th:text="${message.name}">Visitor</h2><a class="email-link" th:href="|mailto:${message.email}|" th:text="${message.email}">visitor@example.com</a></div><span class="quiet" th:text="${message.createdAtLabel}">Today</span></div>
+        <div class="thread-body" th:text="${message.body}">Original visitor message.</div>
+        <form th:if="${message.unread}" th:action="@{/admin/inbox/{id}/read(id=${message.id})}" method="post" class="read-form"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><button type="submit" class="button-secondary">Mark as read</button></form>
+        <div th:unless="${message.unread}" class="read-label">✓ Read</div>
+        <div th:if="${!message.replies.empty}" class="reply-history"><h3>Previous email replies</h3><div class="reply-entry" th:each="reply : ${message.replies}"><div class="reply-meta"><strong>You replied</strong><span th:text="${reply.sentAtLabel}">Today</span></div><p th:text="${reply.body}">Sent reply.</p></div></div>
+      </section>
+      <section class="surface reply-panel" aria-label="Email reply">
+        <p class="eyebrow">SEND EMAIL</p><h2>Reply to visitor</h2>
+        <p class="quiet">Resend sends the reply to <strong th:text="${message.email}">visitor@example.com</strong>. Your sent text is saved to the conversation after Resend accepts it.</p>
+        <form th:action="@{/admin/inbox/{id}/reply(id=${message.id})}" th:object="${replyForm}" method="post" class="admin-form" id="reply-form">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+          <label for="reply-message">Your message</label>
+          <textarea id="reply-message" th:field="*{message}" minlength="5" maxlength="3500" rows="11" placeholder="Write a professional response..." required></textarea>
+          <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="form-error" role="alert">Enter a reply.</p>
+          <button type="submit" class="primary" id="send-reply">Send email reply ↗</button>
+        </form>
+        <p class="foot-note">Email API acceptance is not a delivery guarantee. A verified sender domain is required for replies to arbitrary visitor addresses.</p>
+      </section>
+    </div>
+  </main>
+  <script>
+    document.getElementById('reply-form')?.addEventListener('submit', function () {
+      const button = document.getElementById('send-reply');
+      if (this.checkValidity()) { button.disabled = true; button.textContent = 'Sending…'; }
+    });
+  </script>
+</body>
+</html>
