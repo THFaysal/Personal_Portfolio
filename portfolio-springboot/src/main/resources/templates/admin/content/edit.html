@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive"><title>Content Editor | TH Faysal</title>
+  <link rel="stylesheet" th:href="@{/assets/css/admin.css}" href="/assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+<header class="admin-header"><div class="shell navrow"><a class="brand" th:href="@{/admin/content}">TH<span>.</span> <small>CONTENT EDITOR</small></a>
+<div class="nav-actions"><a th:href="@{/admin/content}">← All content</a><a th:href="@{/admin/inbox}">Inbox</a></div></div></header>
+<main class="shell dashboard cms-editor-page">
+  <a class="back" th:href="@{/admin/content}">← Manage content</a>
+  <p class="eyebrow">PORTFOLIO CONTENT EDITOR</p>
+  <h1 th:text="${heading}">Edit item</h1>
+  <p class="quiet">Saved changes appear on your public portfolio automatically. Text is displayed safely, not interpreted as HTML.</p>
+  <div th:if="${error}" th:text="${error}" class="notice error" role="alert"></div>
+  <section class="surface cms-edit-panel">
+    <form th:action="@{/admin/content/save}" th:object="${form}" method="post" enctype="multipart/form-data" class="cms-edit-form">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <input type="hidden" name="id" th:value="${editingId}">
+      <input type="hidden" th:field="*{type}">
+      <div class="cms-field"><label>Content type</label><p class="cms-readonly" th:text="${form.type.label}">Project</p></div>
+      <div class="cms-field"><label for="cms-title">Title *</label><input id="cms-title" type="text" th:field="*{title}" maxlength="115" required>
+        <small class="cms-field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Required</small></div>
+      <div class="cms-field"><label for="cms-category">Category / type</label><input id="cms-category" type="text" th:field="*{category}" maxlength="65" placeholder="e.g. Network Engineering or Course Completion"></div>
+      <div class="cms-field cms-wide"><label for="cms-description">Description *</label><textarea id="cms-description" th:field="*{description}" rows="4" maxlength="700" required></textarea>
+        <small class="cms-field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Required</small></div>
+      <div class="cms-field"><label for="cms-status">Status</label><select id="cms-status" th:field="*{status}">
+        <option value="">None</option><option value="Completed">Completed</option><option value="Completed &amp; Active">Completed &amp; Active</option>
+        <option value="Active">Active</option><option value="In Progress">In Progress</option><option value="Lab work">Lab work</option><option value="Archived">Archived</option>
+      </select></div>
+      <div class="cms-field"><label for="cms-provider">Provider / organization</label><input id="cms-provider" type="text" th:field="*{provider}" maxlength="90" placeholder="e.g. TryHackMe, Mile2, University"></div>
+      <div class="cms-field"><label for="cms-date">Date label</label><input id="cms-date" type="text" th:field="*{dateLabel}" maxlength="35" placeholder="e.g. Oct 2026"></div>
+      <div class="cms-field"><label for="cms-order">Display order (lower first)</label><input id="cms-order" type="number" min="0" max="9999" th:field="*{sortOrder}"></div>
+      <div class="cms-field cms-wide"><label for="cms-tags">Technology tags (comma separated)</label><input id="cms-tags" type="text" th:field="*{tags}" maxlength="180" placeholder="e.g. GNS3, OpenFlow, Linux"></div>
+      <div class="cms-field cms-wide"><label for="cms-link">Optional external HTTPS link</label><input id="cms-link" type="url" th:field="*{externalUrl}" maxlength="400" placeholder="https://github.com/...">
+        <small class="cms-field-error" th:if="${#fields.hasErrors('externalUrl')}" th:errors="*{externalUrl}">HTTPS only</small></div>
+      <div class="cms-field cms-wide"><label for="cms-image">Certificate image / project screenshot / achievement photo</label>
+        <input id="cms-image" type="file" name="image" accept="image/jpeg,image/png,image/webp">
+        <p class="quiet">Optional JPG, PNG, or WebP; up to 2 MB. Leave blank to keep the current image or illustration.</p>
+        <img th:if="${currentImageUrl}" th:src="${currentImageUrl}" alt="Current content image" class="cms-image-preview">
+        <label th:if="${currentImageUrl}" class="cms-check"><input type="checkbox" th:field="*{removeImage}"> Remove existing image</label>
+      </div>
+      <div class="cms-field cms-options">
+        <label class="cms-check"><input type="checkbox" th:field="*{published}"> Publish to public portfolio</label>
+        <label class="cms-check" th:if="${form.type.name() == 'PROJECT'}"><input type="checkbox" th:field="*{featured}"> Featured project card</label>
+      </div>
+      <div class="cms-editor-actions"><button type="submit" class="primary">Save changes ↗</button><a th:href="@{/admin/content}" class="button-secondary">Cancel</a></div>
+    </form>
+  </section>
+</main>
+</body>
+</html>

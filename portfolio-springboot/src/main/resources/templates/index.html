@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" th:href="@{/assets/css/style.css(v=20261019-contact-links)}" href="/assets/css/style.css?v=20261019-contact-links" />
+  <link rel="stylesheet" th:href="@{/assets/css/style.css(v=20261026-cms)}" href="/assets/css/style.css?v=20261026-cms" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,7 +29,7 @@
         <a href="#contact">Contact</a>
       </nav>
       <div class="header-right">
-        <a class="header-resume" th:href="@{/cv/Tanvirul_Hoque_Faysal_Corporate_IT_CV.pdf}" href="/cv/Tanvirul_Hoque_Faysal_Corporate_IT_CV.pdf" download>Download CV <span aria-hidden="true">↗</span></a>
+        <a class="header-resume" th:href="@{/cv/current}" href="/cv/current" download>Download CV <span aria-hidden="true">↗</span></a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -39,7 +39,7 @@
       <a href="#projects">Projects</a>
       <a href="#certifications">Credentials</a>
       <a href="#contact">Contact</a>
-      <a th:href="@{/cv/Tanvirul_Hoque_Faysal_Corporate_IT_CV.pdf}" href="/cv/Tanvirul_Hoque_Faysal_Corporate_IT_CV.pdf" download>Download CV ↗</a>
+      <a th:href="@{/cv/current}" href="/cv/current" download>Download CV ↗</a>
     </nav>
   </header>
 
@@ -102,7 +102,7 @@
           <a class="text-link" href="#expertise">What I work with <span aria-hidden="true">↗</span></a>
         </div>
         <div class="about-profile" data-reveal>
-          <div class="profile-image-frame"><img th:src="@{/assets/images/profile_thf.jpeg}" src="/assets/images/profile_thf.jpeg" alt="Portrait of Tanvirul Hoque Faysal" loading="lazy" /></div>
+          <div class="profile-image-frame"><img th:src="${portfolio.profileImageUrl}" src="/assets/images/profile_thf.jpeg" alt="Portrait of Tanvirul Hoque Faysal" loading="lazy" /></div>
           <div class="profile-details">
             <div class="profile-label">A QUICK INTRODUCTION</div>
             <h3>Tanvirul Hoque Faysal</h3>
@@ -132,28 +132,36 @@
       <div class="container">
         <div class="section-header" data-reveal><div><div class="section-label"><span>03</span> / SELECTED WORK</div><h2 class="section-title" id="projects-title">Ideas turned into <em>working systems.</em></h2></div><p class="section-aside">A selection of networking labs and software projects. Illustrations represent concepts, not product screenshots.</p></div>
         <div class="projects-grid">
-          <article class="work-card" data-reveal>
-            <div class="work-visual visual-sdn"><div class="visual-kicker">NETWORK LAB / SDN</div><svg viewBox="0 0 460 200" role="img" aria-label="Abstract visualization of redundant network routes"><path d="M55 105 155 50 256 103 365 48 410 105 M55 105 156 159 256 103 366 158 410 105" stroke="#85C5F3" stroke-width="3" fill="none"/><path d="M155 50 156 159 M365 48 366 158" stroke="#B0D9F6" stroke-dasharray="6 8" stroke-width="2" fill="none"/><g fill="#fff" stroke="#5FACEE" stroke-width="3"><circle cx="55" cy="105" r="16"/><circle cx="155" cy="50" r="13"/><circle cx="156" cy="159" r="13"/><circle cx="256" cy="103" r="20"/><circle cx="365" cy="48" r="13"/><circle cx="366" cy="158" r="13"/><circle cx="410" cy="105" r="16"/></g><g fill="#3398EB"><circle cx="55" cy="105" r="6"/><circle cx="155" cy="50" r="5"/><circle cx="156" cy="159" r="5"/><circle cx="256" cy="103" r="8"/><circle cx="365" cy="48" r="5"/><circle cx="366" cy="158" r="5"/><circle cx="410" cy="105" r="6"/></g></svg><span class="visual-footer">LINK FAILURE DETECTED <b>↗ REROUTED</b></span></div>
-            <div class="work-content"><div class="work-meta"><span>01 / NETWORK ENGINEERING</span><span class="status-chip">Completed</span></div><h3>SDN Traffic Rerouting &amp; Link Recovery</h3><p>Designed an SDN campus-network scenario to detect link failures and automatically redirect traffic across redundant paths.</p><div class="work-tags"><span>GNS3</span><span>Faucet</span><span>OpenFlow</span><span>Open vSwitch</span></div></div>
-          </article>
-          <article class="work-card" data-reveal>
-            <div class="work-visual visual-finance"><div class="visual-kicker">BACKEND APPLICATION</div><div class="visual-app"><div class="visual-app-bar"><span class="app-logo">b.</span><span>Overview</span><span>Transactions</span><i></i></div><div class="visual-app-title">Financial overview</div><div class="visual-app-stats"><div><small>Total loans</small><strong>—</strong><i></i></div><div><small>Repayments</small><strong>—</strong><i></i></div><div><small>Outstanding</small><strong>—</strong><i></i></div></div><div class="visual-app-rows"><span></span><span></span><span></span></div></div></div>
-            <div class="work-content"><div class="work-meta"><span>02 / WEB APPLICATION</span><span class="status-chip">Completed</span></div><h3>Bakir Khata — Loan Management</h3><p>Developed a Spring Boot platform for loan records, installments, payments, and repayment status with relational and document storage.</p><div class="work-tags"><span>Spring Boot</span><span>MySQL</span><span>MongoDB</span><span>JPA</span></div></div>
-          </article>
-          <article class="work-card" data-reveal>
-            <div class="work-visual visual-routing"><div class="visual-kicker">CISCO NETWORK LAB</div><div class="routing-illustration"><span class="route-device">R1</span><i></i><span class="route-device">SW</span><i></i><span class="route-device">R2</span><i></i><span class="route-device route-success">✓</span></div><div class="routing-foot">OSPF <span>·</span> BGP <span>·</span> MPLS <span>·</span> QoS</div></div>
-            <div class="work-content"><div class="work-meta"><span>03 / INFRASTRUCTURE</span><span class="status-chip">Lab work</span></div><h3>Enterprise Routing &amp; Switching</h3><p>Built and troubleshot Cisco routing topologies, tested connectivity, and explored routing protocols and traffic behavior.</p><div class="work-tags"><span>Cisco</span><span>GNS3</span><span>Wireshark</span></div></div>
-          </article>
-          <article class="work-card" data-reveal>
-            <div class="work-visual visual-library"><div class="visual-kicker">PERSONAL LIBRARY</div><div class="library-illustration"><div class="library-window"><div class="library-top">ReedKeep <span>My collection ⌕</span></div><div class="book-row"><span class="book-cover book-one"></span><span class="book-cover book-two"></span><span class="book-cover book-three"></span><span class="book-cover book-four"></span><span class="book-cover book-five"></span></div></div></div></div>
-            <div class="work-content"><div class="work-meta"><span>04 / SOFTWARE PROJECT</span><span class="status-chip">Completed</span></div><h3>ReedKeep — Personal Library</h3><p>Created a personal library application with Java, Spring Boot and MongoDB to manage an organized book collection.</p><div class="work-tags"><span>Java</span><span>Spring Boot</span><span>MongoDB</span></div></div>
+          <article class="work-card" data-reveal th:each="item, stat : ${portfolio.featuredProjects}">
+            <div class="work-visual visual-upload" th:if="${item.mediaUrl != null}">
+              <img th:src="${item.mediaUrl}" th:alt="|Image for ${item.title}|" loading="lazy" decoding="async">
+            </div>
+            <div th:if="${item.visualType == 'sdn' and item.mediaUrl == null}" class="work-visual visual-sdn"><div class="visual-kicker">NETWORK LAB / SDN</div><svg viewBox="0 0 460 200" role="img" aria-label="Abstract visualization of redundant network routes"><path d="M55 105 155 50 256 103 365 48 410 105 M55 105 156 159 256 103 366 158 410 105" stroke="#85C5F3" stroke-width="3" fill="none"/><path d="M155 50 156 159 M365 48 366 158" stroke="#B0D9F6" stroke-dasharray="6 8" stroke-width="2" fill="none"/><g fill="#fff" stroke="#5FACEE" stroke-width="3"><circle cx="55" cy="105" r="16"/><circle cx="155" cy="50" r="13"/><circle cx="156" cy="159" r="13"/><circle cx="256" cy="103" r="20"/><circle cx="365" cy="48" r="13"/><circle cx="366" cy="158" r="13"/><circle cx="410" cy="105" r="16"/></g><g fill="#3398EB"><circle cx="55" cy="105" r="6"/><circle cx="155" cy="50" r="5"/><circle cx="156" cy="159" r="5"/><circle cx="256" cy="103" r="8"/><circle cx="365" cy="48" r="5"/><circle cx="366" cy="158" r="5"/><circle cx="410" cy="105" r="6"/></g></svg><span class="visual-footer">LINK FAILURE DETECTED <b>↗ REROUTED</b></span></div>
+            <div th:if="${item.visualType == 'finance' and item.mediaUrl == null}" class="work-visual visual-finance"><div class="visual-kicker">BACKEND APPLICATION</div><div class="visual-app"><div class="visual-app-bar"><span class="app-logo">b.</span><span>Overview</span><span>Transactions</span><i></i></div><div class="visual-app-title">Financial overview</div><div class="visual-app-stats"><div><small>Total loans</small><strong>—</strong><i></i></div><div><small>Repayments</small><strong>—</strong><i></i></div><div><small>Outstanding</small><strong>—</strong><i></i></div></div><div class="visual-app-rows"><span></span><span></span><span></span></div></div></div>
+            <div th:if="${item.visualType == 'routing' and item.mediaUrl == null}" class="work-visual visual-routing"><div class="visual-kicker">CISCO NETWORK LAB</div><div class="routing-illustration"><span class="route-device">R1</span><i></i><span class="route-device">SW</span><i></i><span class="route-device">R2</span><i></i><span class="route-device route-success">✓</span></div><div class="routing-foot">OSPF <span>·</span> BGP <span>·</span> MPLS <span>·</span> QoS</div></div>
+            <div th:if="${item.visualType == 'library' and item.mediaUrl == null}" class="work-visual visual-library"><div class="visual-kicker">PERSONAL LIBRARY</div><div class="library-illustration"><div class="library-window"><div class="library-top">ReedKeep <span>My collection ⌕</span></div><div class="book-row"><span class="book-cover book-one"></span><span class="book-cover book-two"></span><span class="book-cover book-three"></span><span class="book-cover book-four"></span><span class="book-cover book-five"></span></div></div></div></div>
+            <div class="work-visual visual-cms-generic" th:if="${item.visualType == 'generic' and item.mediaUrl == null}">
+              <div class="visual-kicker" th:text="${item.category}">SELECTED PROJECT</div>
+              <div class="cms-visual-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <div class="cms-visual-caption">DESIGNED · CONFIGURED · TESTED</div>
+            </div>
+            <div class="work-content">
+              <div class="work-meta"><span th:text="|${#numbers.formatInteger(stat.count,2)} / ${item.category}|">01 / NETWORK ENGINEERING</span><span class="status-chip" th:if="${!#strings.isEmpty(item.status)}" th:text="${item.status}">Completed</span></div>
+              <h3 th:text="${item.title}">Project name</h3>
+              <p th:text="${item.description}">Project summary</p>
+              <div class="work-tags"><span th:each="tag : ${item.tagList}" th:text="${tag}">GNS3</span></div>
+              <a th:if="${!#strings.isEmpty(item.externalUrl)}" class="work-external" th:href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">View project ↗</a>
+            </div>
           </article>
         </div>
-        <details class="additional-work" data-reveal>
-          <summary>View 2 more projects <span class="summary-icon" aria-hidden="true">+</span></summary>
+        <details class="additional-work" data-reveal th:if="${!portfolio.moreProjects.isEmpty()}">
+          <summary>View <span th:text="${#lists.size(portfolio.moreProjects)}">2</span> more projects <span class="summary-icon" aria-hidden="true">+</span></summary>
           <div class="additional-grid">
-            <article><div class="work-meta"><span>IN PROGRESS</span></div><h3>FolioCircle</h3><p>An expanded personal-library and community platform under development with Java, Spring Boot and MongoDB.</p></article>
-            <article><div class="work-meta"><span>THIS WEBSITE</span></div><h3>Portfolio &amp; Guestbook</h3><p>A Spring Boot site with a MongoDB-backed guestbook, private inbox, downloadable CV, caching and email notifications.</p></article>
+            <article th:each="item : ${portfolio.moreProjects}">
+              <div class="work-meta"><span th:text="${item.status}">IN PROGRESS</span></div>
+              <h3 th:text="${item.title}">FolioCircle</h3><p th:text="${item.description}">Project description.</p>
+              <a th:if="${!#strings.isEmpty(item.externalUrl)}" th:href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">View project ↗</a>
+            </article>
           </div>
         </details>
       </div>
@@ -170,42 +178,18 @@
         </div>
 
         <div class="credentials-grid" aria-label="Certificates and course completions">
-          <article class="certificate-card" data-reveal>
-            <a class="certificate-media" th:href="@{/assets/images/certificates/mile2-cpte.png}" href="/assets/images/certificates/mile2-cpte.png" data-certificate-title="mile2 C)PTE: Certified Penetration Testing Engineer" target="_blank" rel="noopener noreferrer" aria-label="View mile2 Certified Penetration Testing Engineer certificate">
-              <img th:src="@{/assets/images/certificates/mile2-cpte-thumb.webp}" src="/assets/images/certificates/mile2-cpte-thumb.webp" alt="Mile2 C)PTE certificate issued to Tanvirul Hoque Faysal" loading="lazy" decoding="async" width="780" height="597" />
+          <article class="certificate-card" data-reveal th:each="certificate : ${portfolio.certificates}">
+            <a class="certificate-media" th:if="${certificate.mediaUrl != null}" th:href="${certificate.mediaUrl}" th:attr="data-certificate-title=${certificate.title}" target="_blank" rel="noopener noreferrer" th:aria-label="|View ${certificate.title} certificate image|">
+              <img th:src="${certificate.mediaUrl}" th:alt="|Certificate: ${certificate.title}|" loading="lazy" decoding="async">
               <span class="certificate-media-action">View certificate <span aria-hidden="true">&#8599;</span></span>
             </a>
+            <div class="certificate-media certificate-placeholder" th:unless="${certificate.mediaUrl != null}" aria-hidden="true"><span>YOUR<br>LEARNING<br>JOURNEY</span></div>
             <div class="certificate-body">
-              <div class="certificate-meta"><span class="certificate-type">Professional certification</span><time datetime="2026">2026</time></div>
-              <h3>C)PTE: Certified Penetration Testing Engineer</h3>
-              <p class="certificate-provider">mile2 Cybersecurity Certifications</p>
-              <p class="certificate-note">Certificate issue date: 06/10/2026.</p>
-            </div>
-          </article>
-
-          <article class="certificate-card" data-reveal>
-            <a class="certificate-media" th:href="@{/assets/images/certificates/edge-cuet-applied-pentesting.jpg}" href="/assets/images/certificates/edge-cuet-applied-pentesting.jpg" data-certificate-title="Applied Penetration Testing Engineer: Hands-on - EDGE-CSE CUET" target="_blank" rel="noopener noreferrer" aria-label="View Applied Penetration Testing Engineer hands-on training certificate">
-              <img th:src="@{/assets/images/certificates/edge-cuet-applied-pentesting-thumb.webp}" src="/assets/images/certificates/edge-cuet-applied-pentesting-thumb.webp" alt="EDGE-CSE CUET hands-on penetration testing training completion certificate" loading="lazy" decoding="async" width="780" height="544" />
-              <span class="certificate-media-action">View certificate <span aria-hidden="true">&#8599;</span></span>
-            </a>
-            <div class="certificate-body">
-              <div class="certificate-meta"><span class="certificate-type">Hands-on training</span><time datetime="2026-05-18">May 2026</time></div>
-              <h3>Applied Penetration Testing Engineer: Hands-on</h3>
-              <p class="certificate-provider">EDGE-CSE CUET DST Project</p>
-              <p class="certificate-note">87 hours of training, April 7 - May 18, 2026.</p>
-            </div>
-          </article>
-
-          <article class="certificate-card" data-reveal>
-            <a class="certificate-media" th:href="@{/assets/images/certificates/wings-applied-ai.jpg}" href="/assets/images/certificates/wings-applied-ai.jpg" data-certificate-title="Applied AI Deep Learning with Python for Data Analysis - WINGS" target="_blank" rel="noopener noreferrer" aria-label="View WINGS applied AI deep learning course certificate">
-              <img th:src="@{/assets/images/certificates/wings-applied-ai-thumb.webp}" src="/assets/images/certificates/wings-applied-ai-thumb.webp" alt="WINGS Applied AI Deep Learning with Python for Data Analysis completion certificate" loading="lazy" decoding="async" width="780" height="551" />
-              <span class="certificate-media-action">View certificate <span aria-hidden="true">&#8599;</span></span>
-            </a>
-            <div class="certificate-body">
-              <div class="certificate-meta"><span class="certificate-type">Course completion</span><time datetime="2026-08-10">Aug 2026</time></div>
-              <h3>Applied AI Deep Learning with Python for Data Analysis</h3>
-              <p class="certificate-provider">WINGS Institute</p>
-              <p class="certificate-note">Online research-led, non-credit training completed August 10, 2026.</p>
+              <div class="certificate-meta"><span class="certificate-type" th:text="${certificate.category}">Professional certification</span><time th:text="${certificate.dateLabel}">2026</time></div>
+              <h3 th:text="${certificate.title}">Certification</h3>
+              <p class="certificate-provider" th:text="${certificate.provider}">Provider</p>
+              <p class="certificate-note" th:text="${certificate.description}">Certificate details</p>
+              <a class="work-external" th:if="${!#strings.isEmpty(certificate.externalUrl)}" th:href="${certificate.externalUrl}" target="_blank" rel="noopener noreferrer">Verify credential ↗</a>
             </div>
           </article>
         </div>
@@ -214,21 +198,35 @@
           <div class="practice-heading">
             <div class="practice-heading-copy">
               <span class="practice-kicker"><span class="practice-indicator" aria-hidden="true"></span> HANDS-ON SECURITY LABS</span>
-              <h3 id="practice-title">TryHackMe <span>room completions</span></h3>
+              <h3 id="practice-title">Courses &amp; <span>hands-on labs</span></h3>
               <p>Practice in guided cybersecurity lab environments.</p>
             </div>
-            <span class="practice-count" aria-label="Two completed rooms"><strong>02</strong><span>Rooms completed</span></span>
+            <span class="practice-count"><strong th:text="${#lists.size(portfolio.courses)}">02</strong><span>Completed items</span></span>
           </div>
           <div class="practice-grid">
-            <article class="practice-room">
-              <span class="practice-room-icon" aria-hidden="true">01</span>
-              <div class="practice-room-copy"><div class="practice-room-top"><span>TRYHACKME / BLUE</span><span class="room-status"><i aria-hidden="true"></i> Completed</span></div><h4>Blue</h4><p>Windows and SMB vulnerability-focused security lab.</p></div>
+            <article class="practice-room" th:each="course, stat : ${portfolio.courses}">
+              <img th:if="${course.mediaUrl != null}" class="cms-room-image" th:src="${course.mediaUrl}" th:alt="|Image for ${course.title}|" loading="lazy" decoding="async">
+              <span th:unless="${course.mediaUrl != null}" class="practice-room-icon" th:text="${#numbers.formatInteger(stat.count,2)}" aria-hidden="true">01</span>
+              <div class="practice-room-copy">
+                <div class="practice-room-top"><span th:text="${course.category}">TRYHACKME / BLUE</span><span class="room-status"><i aria-hidden="true"></i><span th:text="${course.status}">Completed</span></span></div>
+                <h4 th:text="${course.title}">Blue</h4>
+                <p th:text="${course.description}">Lab details.</p>
+                <a th:if="${!#strings.isEmpty(course.externalUrl)}" th:href="${course.externalUrl}" target="_blank" rel="noopener noreferrer">Course details ↗</a>
+              </div>
               <span class="room-chevron" aria-hidden="true">&#10003;</span>
             </article>
-            <article class="practice-room">
-              <span class="practice-room-icon" aria-hidden="true">02</span>
-              <div class="practice-room-copy"><div class="practice-room-top"><span>TRYHACKME / VULNVERSITY</span><span class="room-status"><i aria-hidden="true"></i> Completed</span></div><h4>Vulnversity</h4><p>Reconnaissance, web enumeration, and privilege-escalation practice.</p></div>
-              <span class="room-chevron" aria-hidden="true">&#10003;</span>
+          </div>
+        </div>
+        <div class="cms-achievements" th:if="${!portfolio.achievements.isEmpty()}" data-reveal>
+          <div class="practice-heading"><div class="practice-heading-copy"><span class="practice-kicker">ACHIEVEMENTS</span><h3>Milestones &amp; <span>recognition</span></h3><p>Projects, achievements, and completed milestones.</p></div></div>
+          <div class="practice-grid">
+            <article class="practice-room cms-achievement-card" th:each="achievement : ${portfolio.achievements}">
+              <img th:if="${achievement.mediaUrl != null}" th:src="${achievement.mediaUrl}" th:alt="|Achievement: ${achievement.title}|" loading="lazy" decoding="async">
+              <span class="practice-room-icon" th:unless="${achievement.mediaUrl != null}" aria-hidden="true">&#9733;</span>
+              <div class="practice-room-copy"><div class="practice-room-top"><span th:text="${achievement.category}">ACHIEVEMENT</span><span class="room-status" th:text="${achievement.dateLabel}"></span></div>
+                <h4 th:text="${achievement.title}">Achievement title</h4><p th:text="${achievement.description}">Description.</p>
+                <a th:if="${!#strings.isEmpty(achievement.externalUrl)}" th:href="${achievement.externalUrl}" target="_blank" rel="noopener noreferrer">See evidence ↗</a>
+              </div>
             </article>
           </div>
         </div>
@@ -265,12 +263,11 @@
                   <svg class="contact-external-arrow" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M8 6h10v10"/></svg>
                 </a>
               </div>
-              <a class="contact-cv-inline" th:href="@{/cv/Tanvirul_Hoque_Faysal_Corporate_IT_CV.pdf}" href="/cv/Tanvirul_Hoque_Faysal_Corporate_IT_CV.pdf" download><span>Download my CV</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></a>
+              <a class="contact-cv-inline" th:href="@{/cv/current}" href="/cv/current" download><span>Download my Corporate IT CV</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg></a>
             </div>
           </div>
-
           <form id="contact-form" class="contact-form" action="/contact" method="post" novalidate data-reveal>
-          <div class="form-title"><h3>Send a message</h3><p>This goes directly to my private inbox.</p></div>
+            <div class="form-title"><h3>Send a message</h3><p>This goes directly to my private inbox.</p></div>
             <div class="form-row"><div class="field"><label for="name">Your name <span aria-hidden="true">*</span></label><input id="name" name="name" maxlength="80" placeholder="Full name" autocomplete="name" required /></div><div class="field"><label for="email">Email address <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" maxlength="200" placeholder="you@example.com" autocomplete="email" required /></div></div>
             <div class="field"><label for="subject">Subject <span class="optional">(optional)</span></label><input id="subject" name="subject" maxlength="200" placeholder="What is this about?" /></div>
             <div class="field"><label for="message">Your message <span aria-hidden="true">*</span></label><textarea id="message" name="message" rows="5" minlength="10" maxlength="1500" placeholder="Tell me a little about your idea or question..." required></textarea></div>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Manage Content | TH Faysal</title>
+  <link rel="stylesheet" th:href="@{/assets/css/admin.css}" href="/assets/css/admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+<header class="admin-header"><div class="shell navrow">
+  <a class="brand" th:href="@{/admin/content}">TH<span>.</span> <small>CONTENT CMS</small></a>
+  <div class="nav-actions"><a th:href="@{/admin/inbox}">Inbox</a><a th:href="@{/}" target="_blank" rel="noopener noreferrer">Portfolio ↗</a>
+  <form th:action="@{/admin/logout}" method="post"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><button class="button-link" type="submit">Sign out</button></form></div>
+</div></header>
+<main class="shell dashboard content-dashboard">
+  <p class="eyebrow">PORTFOLIO CONTENT MANAGER</p>
+  <div class="dashboard-heading"><div><h1>Manage your portfolio</h1>
+    <p class="quiet">Update projects, certificates, achievements, courses, profile photo and CV without redeploying.</p></div></div>
+  <div th:if="${notice}" th:text="${notice}" role="status" class="notice success"></div>
+  <div th:if="${error}" th:text="${error}" role="alert" class="notice error"></div>
+  <div th:if="${param.missing}" class="notice error">This content item was not found.</div>
+
+  <div class="cms-two-up">
+    <section class="surface cms-upload-panel" aria-labelledby="cms-photo-label">
+      <p class="eyebrow">PROFILE</p><h2 id="cms-photo-label">Profile photo</h2>
+      <p class="quiet">JPG, PNG or WebP (up to 2 MB). Your existing photo is kept until a new upload succeeds.</p>
+      <form class="cms-inline-upload" th:action="@{/admin/content/photo}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label class="cms-file-label">Choose image <input type="file" name="file" accept="image/jpeg,image/png,image/webp" required></label>
+        <button class="primary" type="submit">Replace photo ↗</button>
+      </form>
+      <form th:if="${settings.profileImageId != null}" th:action="@{/admin/content/photo/reset}" method="post" class="cms-reset-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <button class="button-secondary" type="submit">Restore bundled photo</button>
+      </form>
+    </section>
+    <section class="surface cms-upload-panel" aria-labelledby="cms-cv-label">
+      <p class="eyebrow">DOCUMENTS</p><h2 id="cms-cv-label">Your Corporate IT CV</h2>
+      <p class="quiet">Upload or replace the CV PDF (up to 5 MB). Every Download CV button uses the latest uploaded file.</p>
+      <form class="cms-inline-upload" th:action="@{/admin/content/cv}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label class="cms-file-label">Choose PDF <input type="file" name="file" accept="application/pdf,.pdf" required></label>
+        <button class="primary" type="submit">Replace CV ↗</button>
+      </form>
+      <div class="cms-cv-links"><a th:href="@{/cv/current}" target="_blank" rel="noopener noreferrer">Download current CV ↗</a>
+      <form th:if="${settings.cvFileId != null}" th:action="@{/admin/content/cv/reset}" method="post" class="cms-reset-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <button class="button-secondary" type="submit">Restore bundled CV</button>
+      </form></div>
+    </section>
+  </div>
+
+  <section class="surface cms-items" aria-labelledby="cms-items-label">
+    <div class="cms-items-header"><div><p class="eyebrow">PUBLISHED &amp; DRAFT ITEMS</p><h2 id="cms-items-label">Portfolio content</h2></div>
+      <div class="cms-add-actions">
+        <a th:each="t : ${types}" th:href="@{/admin/content/new(type=${t.name()})}" class="button-link" th:text="|+ ${t.label}|">Add</a>
+      </div>
+    </div>
+    <p class="cms-guidance">Edit to change project status, order, visibility or images. Unpublish to hide an item without deleting it.</p>
+    <div th:if="${items.empty}" class="empty-state">No content yet.</div>
+    <div class="cms-item-row" th:each="entry : ${items}">
+      <div class="cms-item-copy">
+        <span class="cms-item-type" th:text="${entry.type.label}">Projects</span>
+        <strong th:text="${entry.title}">Project title</strong>
+        <span class="quiet" th:text="|${entry.status} · Order ${entry.sortOrder}|">Status</span>
+      </div>
+      <span th:classappend="${entry.published} ? ' cms-live' : ' cms-draft'" class="cms-state" th:text="${entry.published} ? 'Published' : 'Hidden'">Published</span>
+      <a class="button-link" th:href="@{/admin/content/{id}/edit(id=${entry.id})}">Edit</a>
+      <form class="cms-delete" th:action="@{/admin/content/{id}/delete(id=${entry.id})}" method="post" onsubmit="return confirm('Delete this item? This cannot be undone.');">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <button type="submit" class="button-secondary">Delete</button>
+      </form>
+    </div>
+  </section>
+  <p class="foot-note">Uploads are stored in MongoDB Atlas GridFS, not on Render's temporary filesystem. Public pages are read-only; only your logged-in admin account may edit content.</p>
+</main>
+</body>
+</html>

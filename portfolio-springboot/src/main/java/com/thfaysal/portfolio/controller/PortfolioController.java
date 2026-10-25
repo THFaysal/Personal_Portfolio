@@ -1,6 +1,7 @@
 package com.thfaysal.portfolio.controller;
 
 import com.thfaysal.portfolio.dto.ContactForm;
+import com.thfaysal.portfolio.cms.PortfolioContentService;
 import com.thfaysal.portfolio.service.PrivateInboxService;
 import com.thfaysal.portfolio.service.SubmissionLimiter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,14 +27,17 @@ public class PortfolioController {
     private static final Logger log = LoggerFactory.getLogger(PortfolioController.class);
     private final PrivateInboxService inbox;
     private final SubmissionLimiter limiter;
+    private final PortfolioContentService content;
 
-    public PortfolioController(PrivateInboxService inbox, SubmissionLimiter limiter) {
+    public PortfolioController(PrivateInboxService inbox, SubmissionLimiter limiter, PortfolioContentService content) {
         this.inbox = inbox;
         this.limiter = limiter;
+        this.content = content;
     }
 
     @GetMapping("/")
-    public String showPortfolio() {
+    public String showPortfolio(Model model) {
+        model.addAttribute("portfolio", content.publicView());
         return "index";
     }
 

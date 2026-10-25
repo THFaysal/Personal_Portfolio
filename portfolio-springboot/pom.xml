@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.thfaysal</groupId>
     <artifactId>portfolio</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <name>portfolio</name>
     <description>Tanvirul Hoque Faysal - networking and software portfolio</description>
     <properties>

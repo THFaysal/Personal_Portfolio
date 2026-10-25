@@ -1,6 +1,11 @@
 package com.thfaysal.portfolio.controller;
 
 import com.thfaysal.portfolio.service.PrivateInboxService;
+import com.thfaysal.portfolio.cms.PortfolioContentService;
+import com.thfaysal.portfolio.cms.PortfolioSettings;
+import com.thfaysal.portfolio.cms.PortfolioItem;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import com.thfaysal.portfolio.service.SubmissionLimiter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +29,14 @@ class PortfolioControllerTest {
     @Autowired MockMvc mvc;
     @MockBean PrivateInboxService inbox;
     @MockBean SubmissionLimiter limiter;
+    @MockBean PortfolioContentService content;
+
+    @BeforeEach
+    void setupPortfolio() {
+        org.mockito.Mockito.when(content.publicView()).thenReturn(
+            new PortfolioContentService.PublicView(List.of(), List.of(), List.of(), List.of(), List.of(),
+                "/assets/images/profile_thf.jpeg"));
+    }
 
     @Test
     void rendersPortfolio() throws Exception {

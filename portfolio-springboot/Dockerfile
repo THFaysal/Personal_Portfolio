@@ -9,7 +9,7 @@ RUN mvn -B -q -DskipTests package
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 RUN useradd -r -u 10001 portfolio
-COPY --from=build /build/target/portfolio-1.2.0.jar /app/portfolio.jar
+COPY --from=build /build/target/portfolio-*.jar /app/portfolio.jar
 USER portfolio
 EXPOSE 8080
 ENV JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=65.0 -XX:ActiveProcessorCount=2"

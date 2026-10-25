@@ -487,3 +487,20 @@ img,svg { display: block; max-width: 100%; }
 }
 /* Page-visibility pause: cosmetic motion needn't run in inactive tabs. */
 .page-hidden .floating-sheet { animation-play-state:paused; }
+
+/* CMS support: preserve existing public card styles and animations. */
+.work-visual.visual-upload { display:block; overflow:hidden; }
+.visual-upload img { width:100%; height:100%; object-fit:cover; display:block; }
+.work-visual.visual-cms-generic { background:linear-gradient(135deg,#e8f5ff,#cde8fb); display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
+.cms-visual-mark { display:flex; align-items:center; justify-content:center; gap:13px; flex:1; }
+.cms-visual-mark span { width:35px; height:35px; border:4px solid #62ace0; background:rgba(255,255,255,.7); box-shadow:0 0 0 8px rgba(69,151,209,.08); border-radius:11px; transform:rotate(45deg); }
+.cms-visual-mark span:nth-child(even) { transform:rotate(30deg) translateY(16px); }
+.cms-visual-caption { color:#377caf; font-size:11px; font-weight:800; letter-spacing:.1em; margin:0 0 14px 20px; }
+.work-external { display:inline-block; font-weight:800; font-size:12px; color:#1879c6; margin-top:10px; }
+.work-external:hover { color:#0e508a; text-decoration:underline; }
+.certificate-placeholder { background:linear-gradient(130deg,#e3f2ff,#a9d4ef); display:grid; place-items:center; min-height:175px; text-align:center; font:800 22px/1.3 Manrope,sans-serif; letter-spacing:.1em; color:#397cae; }
+.cms-achievements { margin-top:37px; }
+.cms-achievement-card > img { width:74px; height:74px; border-radius:12px; object-fit:cover; flex-shrink:0; }
+.cms-achievement-card .practice-room-copy a,.practice-room-copy > a { font-size:12px; font-weight:800; color:#1879c6; }
+
+.cms-room-image { width:74px; height:74px; border-radius:12px; object-fit:cover; flex-shrink:0; }

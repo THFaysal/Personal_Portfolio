@@ -66,7 +66,7 @@ public class AdminSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/admin/login", "/error").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/", "/assets/**", "/cv/**", "/favicon.ico", "/api/comments", "/contact").permitAll()
+                .requestMatchers("/", "/assets/**", "/cv/**", "/media/**", "/favicon.ico", "/api/comments", "/contact").permitAll()
                 .anyRequest().denyAll())
             // Public APIs do not rely on authenticated sessions; admin operations KEEP CSRF protection.
             .csrf(csrf -> csrf.ignoringRequestMatchers("/contact", "/api/comments"))

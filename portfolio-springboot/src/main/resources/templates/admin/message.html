@@ -16,7 +16,7 @@
   <header class="admin-header">
     <div class="shell navrow">
       <a class="brand" th:href="@{/admin/inbox}">TH<span>.</span> <small>ADMIN / INBOX</small></a>
-      <div class="nav-actions"><a th:href="@{/admin/inbox}">← Inbox</a><form th:action="@{/admin/logout}" method="post"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><button type="submit" class="button-link">Sign out</button></form></div>
+      <div class="nav-actions"><a th:href="@{/admin/content}">Manage content</a><a th:href="@{/admin/inbox}">← Inbox</a><form th:action="@{/admin/logout}" method="post"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><button type="submit" class="button-link">Sign out</button></form></div>
     </div>
   </header>
   <main class="shell dashboard detail-view">

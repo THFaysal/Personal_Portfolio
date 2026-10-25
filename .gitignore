@@ -1,0 +1,10 @@
+# IDE, local credentials and build outputs
+.idea/
+**/.idea/
+.env
+.env.*
+!.env.example
+**/target/
+*.log
+*.class
+.DS_Store
